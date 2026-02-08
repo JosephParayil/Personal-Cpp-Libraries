@@ -57,11 +57,13 @@ struct Text2D : Shape2D {
     sf::Font font;
     sf::Text text;
 
-    Text2D(sf::Vector2f pos, std::string t, sf::Font f)
+    Text2D(sf::Vector2f pos, std::string t, sf::Font f, int size = 30)
         : font(f), text(font, t) {
+        text.setCharacterSize(std::min(size, 500));
         text.setPosition(pos);
         text.setOrigin({text.getGlobalBounds().size.x / 2,
                         text.getGlobalBounds().size.y / 2});
+        
     }
 
     void draw(sf::RenderWindow& window,

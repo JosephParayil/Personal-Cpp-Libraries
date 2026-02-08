@@ -146,9 +146,12 @@ struct Label3D : Object3D {
 
         if (view_pos.z <= NEAR) return nullptr;
 
+
+        int size_transformed = 0.5f * camera.FOV / std::sqrt(view_pos.z);
+
         sf::Vector2f screen_pos =
             normalize_point(window, convert_3d_to_2d(view_pos, camera));
 
-        return std::make_unique<Text2D>(screen_pos, text, font);
+        return std::make_unique<Text2D>(screen_pos, text, font, size_transformed);
     }
 };

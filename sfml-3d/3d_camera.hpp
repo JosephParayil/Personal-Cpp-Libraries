@@ -20,7 +20,9 @@ struct Camera {
     mat4 cf;
     float yaw, pitch;
 
+    
     bool mouseLocked;
+    bool allowMouseLocking;
     bool crosshairEnabled;
     float sensitivity;
     sf::Vector2i setRightClickPos;
@@ -47,6 +49,7 @@ struct Camera {
         window.setFramerateLimit(FPS);
 
         mouseLocked = false;
+        allowMouseLocking = true;
         crosshairEnabled = true;
         setRightClickPos = sf::Mouse::getPosition(window);
         // CURSOR_DEFAULT =
@@ -69,7 +72,9 @@ struct Camera {
     void handleEvent(const std::optional<sf::Event>& event) {
         if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
             if (keyPressed->scancode == sf::Keyboard::Scan::Escape) {
-                mouseLocked = !mouseLocked;
+                if (allowMouseLocking) mouseLocked = !mouseLocked;
+                else mouseLocked = false;
+                
                 // window.setMouseCursorVisible(!mouseLocked);
 
             } else if (keyPressed->scancode == sf::Keyboard::Scan::R) {

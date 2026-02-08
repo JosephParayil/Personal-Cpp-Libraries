@@ -62,6 +62,21 @@ struct Object3D_Collection {
     }
 };
 
+//Weird draw line from 3D to 2D point:
+void draw3DLineTo2DPoint(sf::RenderWindow& window, vec4 a, sf::Vector2f b, Camera& camera, float thickness = 1.0f, sf::Color color = sf::Color::White) {
+    mat4 camera_inverse = camera.cf.inverse_rigid();
+    vec4 a_t = camera_inverse * a;
+
+    if (a_t.z <= NEAR)
+        a_t.z = NEAR*2; //basically still near
+
+    sf::Vector2f a_ = normalize_point(window, Object3D::convert_3d_to_2d(a_t, camera));
+
+    drawLine(window, a_, b, thickness, color);
+
+}
+
+
 // CUBE (basically a collection of 12 Line3D objects)
 std::array<vec4, 8> cubeVertices(vec4 center, float edge) {
     float h = edge / 2.f;
