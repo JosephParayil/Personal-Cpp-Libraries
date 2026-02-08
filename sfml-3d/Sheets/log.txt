@@ -1,0 +1,41 @@
+
+----------------------------------------------------------------------------------------
+feb 7th 
+
+Next step: Implement depth-sorting
+
+
+New class: Object3D_Collection
+    objects = Vector of pairs: < ID , Object3D >
+    
+    function: depthSort() - sorts everything based on distance to camera
+
+Ordering of the vector determines closness (sorted farthest to closest)
+
+
+
+ON depth sorting:
+- In it's current stage, it is not perfect
+- Future modifications:
+    - Implement just a 1-step bubble sorting step each frame for improved performance
+    - In this way, we can resolve lines and balls to true precision. 
+
+
+
+
+
+----------------------------------------------------------------------------------------
+feb 6th 
+
+Transitioning everything to OOP seems to be a success.
+
+Next steps:
+    1. Split into a 2D and 3D file
+    2. Make it compatible with older versions of code
+    3. Test with previous versions that used 3D engine
+----4. Handle cubes and just change older versions that drew cubes
+
+5. Implement depth-sorting
+
+----------------------------------------------------------------------------------------
+

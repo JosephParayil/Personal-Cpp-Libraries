@@ -1,0 +1,69 @@
+Consider this code:
+
+
+I want to revolutionize the structure of this 3D rendering code using OOP.
+
+
+First of all, I want to define objects for 3D and 2D structures. 
+
+
+Object3D
+    Static Methods/Members:
+        - convert_3d_to_2d
+	Members:
+		- vec4 position
+	
+	Methods:
+		- computeShape (abstract method)
+		- draw
+			- internally calls computeShape and calls the shapes' draw function
+		
+
+	Subclasses: 
+		- Line3D
+			Members:
+				- vec4 a
+                - vec4 b
+
+            Methods:
+                - computeShape returns the corresponding Line2D
+                - draw can pass in thickness as a parameter
+		
+		- Sphere3D
+            Members:
+                - float radius
+            
+            Methods:
+                - computeShape returns a Circle2D
+
+        - Cube3D: a bit of an oddball, doesn't quite logically fit in with the other two subclasses
+        - Will possibly make it a class separate from Object3D. It is more of a collection of Object3D objects.
+            Members:
+                - It will have a collection of 12 Line3D objects
+            Methods:
+                - draw would just draw each line3D objects
+
+Shape2D
+    Static methods/members:
+        - normalize_point
+	Members:
+
+	Methods:
+         - draw (abstract) (takes in color, window, etc)
+         - computeCollisionWithPoint (abstract)
+	Subclasses:
+		- Line2D
+            - Two sf::Vector2f points
+
+		- Circle2D
+            - One sf::Vector2f point and a float radius
+	
+
+
+
+
+Notes: 
+	- I want to only use structs as I do not intend on any members being private.
+	- vec4 is a essentially a 3D point with homogenous coordinates.
+    - NEAR and FOV will be moved to being part of the Camera class imported in 3d_camera.hpp
+
